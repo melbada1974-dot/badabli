@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bada BLI — Korean Level Test</title>
+    <meta name="description"
+        content="Free Korean proficiency level test based on Sejong Korean standards. Find your level in 20 questions.">
+    <meta name="theme-color" content="#050b1a">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ── Background Canvas ─────────────────────────── -->
+    <div class="bg-canvas" aria-hidden="true">
+        <div class="bg-grid"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <!-- ── App Shell ──────────────────────────────────── -->
+    <div class="app-wrapper">
+        <div class="app-container">
+
+            <!-- Header (Hidden to save space when embedded) -->
+            <header class="app-header" role="banner" style="display: none;">
+                <div class="logo-wrap">
+                    <div class="logo-badge">
+                        <span class="logo-badge-dot"></span>
+                        Free Level Test
+                    </div>
+                    <h1 class="logo-title">Bada BLI</h1>
+                    <p class="logo-subtitle">Korean Language Institute</p>
+                </div>
+            </header>
+
+            <!-- ═══════════════════════════════════════════
+                 SCREEN 1 — Onboarding
+            ═══════════════════════════════════════════ -->
+            <section id="screen-onboarding" class="screen active" aria-label="Welcome screen">
+                <div class="card card-glow-blue fade-up">
+
+                    <!-- Card Header -->
+                    <div class="onboarding-header">
+                        <div class="section-tag">✦ Placement Test</div>
+                        <h2>Check Your<br>Korean Level</h2>
+                        <p>Enter your details below to begin. <br>Only 20 questions · Takes ~5 minutes</p>
+                    </div>
+
+                    <!-- Feature Pills -->
+                    <div class="feature-pills">
+                        <span class="pill"><span class="pill-icon">📊</span>Sejong Standards</span>
+                        <span class="pill"><span class="pill-icon">⚡</span>Instant Results</span>
+                        <span class="pill"><span class="pill-icon">🎯</span>Level 1–6</span>
+                    </div>
+
+                    <div class="divider">Your Info</div>
+
+                    <!-- Form -->
+                    <form id="onboarding-form" class="form" novalidate>
+                        <!-- First Name + Last Name row -->
+                        <div style="display:flex;gap:10px">
+                            <div class="field" style="flex:1">
+                                <label class="field-label" for="userFirstName">First Name <span
+                                        style="color:var(--coral)">*</span></label>
+                                <div class="field-wrap">
+                                    <span class="field-icon">👤</span>
+                                    <input type="text" id="userFirstName" name="firstName" required
+                                        placeholder="First name" autocomplete="given-name">
+                                </div>
+                            </div>
+                            <div class="field" style="flex:1">
+                                <label class="field-label" for="userLastName">Last Name <span
+                                        style="color:var(--coral)">*</span></label>
+                                <div class="field-wrap">
+                                    <span class="field-icon">👤</span>
+                                    <input type="text" id="userLastName" name="lastName" required
+                                        placeholder="Last name" autocomplete="family-name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="field-label" for="userEmail">Email <span
+                                    style="color:var(--coral)">*</span></label>
+                            <div class="field-wrap">
+                                <span class="field-icon">✉️</span>
+                                <input type="email" id="userEmail" name="email" required placeholder="your@email.com"
+                                    autocomplete="email">
+                            </div>
+                        </div>
+
+                        <!-- Validation error message -->
+                        <p id="form-error"
+                            style="display:none;color:var(--coral);font-size:0.82rem;margin-top:-0.25rem;text-align:center">
+                            ⚠ Please fill in all required fields with a valid email.</p>
+
+                        <div class="field">
+                            <label class="field-label" for="userPurpose">Purpose of Study</label>
+                            <div class="field-wrap">
+                                <span class="field-icon">🎯</span>
+                                <select id="userPurpose" name="purpose" required>
+                                    <option value="">Please select…</option>
+                                    <option value="hobby">Hobby / K-Culture</option>
+                                    <option value="test">TOPIK Preparation</option>
+                                    <option value="study">Study Abroad / Academic</option>
+                                    <option value="work">Employment / Business</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btn-start" class="btn btn-primary btn-w100" style="margin-top:0.5rem">
+                            <span>Start Test</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 SCREEN 2 — Test
+            ═══════════════════════════════════════════ -->
+            <section id="screen-test" class="screen" aria-label="Test questions">
+
+                <!-- Progress -->
+                <div class="progress-block fade-up">
+                    <div class="progress-row">
+                        <span class="progress-label" id="question-counter">Question 1 / 20</span>
+                        <span class="progress-badge" id="level-indicator">
+                            <span id="level-dot" class="q-level-dot" style="color: var(--cyan)"></span>
+                            Basic
+                        </span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progress-bar-fill"></div>
+                    </div>
+                    <div class="progress-dots" id="progress-dots" aria-hidden="true">
+                        <!-- dots injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="card" id="question-card">
+
+                    <!-- Level Tag -->
+                    <div id="q-level-tag" class="q-level-tag basic">
+                        <span class="q-level-dot"></span>
+                        <span id="q-level-text">Basic</span>
+                    </div>
+
+                    <!-- Question -->
+                    <p class="q-instruction" id="question-text">다음 빈칸에 들어갈 알맞은 말을 고르십시오.</p>
+                    <div class="q-box" id="question-content" aria-live="polite">
+                        <!-- Injected by JS -->
+                    </div>
+
+                    <!-- Options -->
+                    <div class="options-grid" id="options-container" role="radiogroup" aria-label="Answer options">
+                        <!-- Injected by JS -->
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="actions-row">
+                        <button type="button" class="btn btn-secondary" id="btn-next" disabled
+                            aria-label="Go to next question">
+                            <span>Next</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 SCREEN 3 — Loading / Analysis
+            ═══════════════════════════════════════════ -->
+            <section id="screen-loading" class="screen" aria-label="Analyzing results" aria-live="assertive">
+                <div class="loading-screen">
+
+                    <!-- Orbital Loader -->
+                    <div class="loader-orbit" role="img" aria-label="Loading spinner">
+                        <div class="loader-ring"></div>
+                        <div class="loader-ring loader-ring-2"></div>
+                        <div class="loader-ring loader-ring-3"></div>
+                        <div class="loader-core">
+                            <div class="loader-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="loading-text">
+                        <h3>Analyzing Your Results</h3>
+                        <p>Calculating your Korean proficiency level</p>
+                        <div class="typing-dots" aria-hidden="true">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Steps -->
+                    <div class="analysis-steps" aria-hidden="true">
+                        <div class="a-step" id="a-step-1">
+                            <span class="a-step-icon">📝</span>
+                            <span>Scoring your answers…</span>
+                        </div>
+                        <div class="a-step" id="a-step-2">
+                            <span class="a-step-icon">🧠</span>
+                            <span>Mapping to Sejong Korean levels…</span>
+                        </div>
+                        <div class="a-step" id="a-step-3">
+                            <span class="a-step-icon">✨</span>
+                            <span>Generating your report…</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════
+                 SCREEN 4 — Result
+            ═══════════════════════════════════════════ -->
+            <section id="screen-result" class="screen" aria-label="Test results">
+                <div class="card">
+
+                    <!-- Hero -->
+                    <div class="result-hero">
+                        <h2>Result for <strong id="result-name">User</strong></h2>
+
+                        <!-- Score Ring -->
+                        <div class="score-ring-wrap">
+                            <div class="score-ring" role="img" aria-labelledby="score-text">
+                                <svg class="score-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                    <circle class="score-track" cx="60" cy="60" r="54" />
+                                    <circle class="score-arc" id="score-arc" cx="60" cy="60" r="54"
+                                        stroke-dasharray="0 339" />
+                                </svg>
+                                <div class="score-inner">
+                                    <span class="score-num" id="score-text">0</span>
+                                    <span class="score-unit">/ 100 pts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level Card -->
+                    <div class="level-card" id="level-card">
+                        <p class="level-card-label">Recommended Level</p>
+                        <p class="level-card-value" id="level-value">Level 1</p>
+                        <p class="level-card-desc" id="level-desc">Sejong Korean Vol. 1~2</p>
+
+                        <!-- Level Tiers -->
+                        <div class="level-tiers" id="level-tiers" aria-hidden="true">
+                            <div class="tier" data-tier="1"></div>
+                            <div class="tier" data-tier="2"></div>
+                            <div class="tier" data-tier="3"></div>
+                            <div class="tier" data-tier="4"></div>
+                            <div class="tier" data-tier="5"></div>
+                            <div class="tier" data-tier="6"></div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback -->
+                    <div class="feedback-box" id="feedback-text" aria-live="polite">
+                        <!-- Injected by JS -->
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="cta-section">
+                        <h3>What's your next step?</h3>
+                        <div class="cta-grid">
+                            <button class="btn btn-primary btn-w100 cta-btn-primary"
+                                onclick="window.open('https://example.com/consulting', '_blank')"
+                                aria-label="Apply for offline consultation">
+                                <span>🏫</span>
+                                Apply for Offline Consultation
+                            </button>
+
+                            <div class="share-row">
+                                <button class="btn btn-outline" style="flex:1"
+                                    onclick="alert('Online VOD notification registered!')"
+                                    aria-label="Apply for online VOD notification">
+                                    <span>📺</span>
+                                    Online VOD Alert
+                                </button>
+                                <button class="btn btn-ghost" id="btn-restart" aria-label="Retake the test">
+                                    🔄 Retake
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="app-footer">
+                © 2025 Bada BLI Korean Language Institute · Free Level Test
+            </footer>
+
+        </div><!-- /.app-container -->
+    </div><!-- /.app-wrapper -->
+
+    <script src="script.js"></script>
+</body>
+
+</html>

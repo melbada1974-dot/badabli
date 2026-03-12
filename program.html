@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bada BLI - Program</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons for elegant icons used in cards -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bada: {
+                            DEFAULT: '#23508e',
+                            light: '#376ab5',
+                            dark: '#163561',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-accent': 'linear-gradient(135deg, #ffffff 0%, #23508e 100%)',
+                        'gradient-accent-reverse': 'linear-gradient(135deg, #23508e 0%, #ffffff 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #23508e, #5a8bd4);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Smooth reveal for scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        /* Orbit Animation Styles */
+
+        .orbit-item {
+            width: 280px;
+            height: 130px;
+            margin-left: -140px;
+            margin-top: -65px;
+            transition: opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .orbit-item {
+                width: 360px;
+                height: 160px;
+                margin-left: -180px;
+                margin-top: -80px;
+            }
+        }
+
+        .orbit-text-content {
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .orbit-text-content.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50 text-gray-800 selection:bg-bada selection:text-white overflow-x-hidden">
+
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 bg-transparent text-white py-0">
+        <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+            <a href="index.html" class="hover:opacity-80 transition-opacity">
+                <!-- Using the same logo as index.html -->
+                <img src="logo-white.png" alt="Bada BLI Logo" class="h-[100px] w-auto">
+            </a>
+            <nav class="hidden md:flex space-x-10 text-sm font-medium tracking-widest uppercase">
+                <a href="index.html" class="relative group">
+                    Home
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="program.html" class="relative group">
+                    Program
+                    <span class="absolute -bottom-2 left-0 w-full h-0.5 bg-white transition-all duration-300"></span>
+                </a>
+                <a href="pricing.html" class="relative group">
+                    Pricing
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#footer" class="relative group">
+                    CS
+                    <span
+                        class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white hover:text-gray-300 transition">
+                <i class="ph ph-list text-3xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-full left-0 w-full bg-bada shadow-xl border-t border-white/10 flex-col items-center py-6 space-y-4">
+            <a href="index.html" class="mobile-link text-white text-lg font-medium tracking-widest uppercase">Home</a>
+            <a href="program.html"
+                class="mobile-link text-white text-lg font-medium tracking-widest uppercase">Program</a>
+            <a href="pricing.html"
+                class="mobile-link text-white text-lg font-medium tracking-widest uppercase">Pricing</a>
+            <a href="#footer" class="mobile-link text-white text-lg font-medium tracking-widest uppercase">CS</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative w-full h-screen flex items-center justify-center bg-black bg-cover bg-center md:bg-fixed"
+        style="background-image: url('Korea palace.png');">
+        <!-- Dark overlay for text readability -->
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <div class="container mx-auto px-6 md:px-12 relative z-10 text-center reveal">
+            <span
+                class="text-blue-300 font-semibold tracking-[0.2em] uppercase text-sm mb-4 block drop-shadow-md">Programs</span>
+            <h1 class="text-5xl md:text-6xl lg:text-8xl font-serif font-bold text-white mb-6 drop-shadow-lg">
+                Your Complete Roadmap to <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">Korean
+                    Mastery</span>.
+            </h1>
+            <p
+                class="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto font-light leading-relaxed mb-10 drop-shadow-md">
+                Whether you want to live the culture or lead a career, Bada BLI provides the exact roadmap you need to
+                speak Korean with confidence and clarity.
+            </p>
+            <div class="w-24 h-1 bg-bada mx-auto rounded-full opacity-90 shadow-[0_0_15px_rgba(55,106,181,0.5)]"></div>
+        </div>
+    </section>
+
+    <!-- Path to Mastery (Cinematic Split-Reveal Animation) -->
+    <section id="path-to-mastery" class="relative bg-black" style="height: 400vh;">
+        <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center bg-black"
+            style="will-change: transform; transform: translateZ(0);">
+
+            <!-- Revealed Content (Behind the image) -->
+            <div id="path-reveal-content"
+                class="absolute inset-0 z-10 flex flex-col items-center justify-center opacity-0 translate-y-10 transition-all duration-[800ms] ease-out pointer-events-none"
+                style="will-change: transform, opacity; transform: translateZ(0);">
+                <div class="container mx-auto px-6 md:px-12 text-center">
+                    <span
+                        class="text-bada-light font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3 md:mb-4 block">Your
+                        Path to Mastery</span>
+                    <h2
+                        class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-4 md:mb-6 leading-tight">
+                        How Bada BLI Leads You to Success</h2>
+                    <p class="text-base md:text-lg text-gray-400 font-light leading-relaxed max-w-2xl mx-auto mb-16">A
+                        simple, proven process to take you from a beginner to a confident speaker.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                        <!-- Card 1 -->
+                        <div class="path-card bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 p-6 md:p-8 rounded-2xl relative z-10 shadow-2xl opacity-0 translate-y-12"
+                            style="will-change: transform, opacity; transform: translateZ(0);">
+                            <div
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border border-bada flex items-center justify-center text-white font-bold text-lg md:text-xl mb-4 md:mb-6 shadow-[0_0_15px_rgba(55,106,181,0.5)] mx-auto md:mx-0">
+                                1</div>
+                            <h3
+                                class="text-lg md:text-xl font-serif font-bold text-white mb-2 md:mb-3 text-center md:text-left">
+                                Step 1 : Find Your Level</h3>
+                            <p
+                                class="text-zinc-400 font-light text-xs md:text-sm leading-relaxed text-center md:text-left">
+                                Don’t waste time on what you already know. Our expert placement test ensures you start
+                                exactly where you need to be.</p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="path-card bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 p-6 md:p-8 rounded-2xl relative z-10 shadow-2xl opacity-0 translate-y-12"
+                            style="will-change: transform, opacity; transform: translateZ(0);">
+                            <div
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border border-bada flex items-center justify-center text-white font-bold text-lg md:text-xl mb-4 md:mb-6 shadow-[0_0_15px_rgba(55,106,181,0.5)] mx-auto md:mx-0">
+                                2</div>
+                            <h3
+                                class="text-lg md:text-xl font-serif font-bold text-white mb-2 md:mb-3 text-center md:text-left">
+                                Step 2 : Engage in Interactive Learning</h3>
+                            <p
+                                class="text-zinc-400 font-light text-xs md:text-sm leading-relaxed text-center md:text-left">
+                                Don’t waste time on what you already know. Our expert placement test ensures you start
+                                exactly where you need to be.</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="path-card bg-zinc-900/40 backdrop-blur-xl border border-zinc-700/50 p-6 md:p-8 rounded-2xl relative z-10 shadow-2xl opacity-0 translate-y-12"
+                            style="will-change: transform, opacity; transform: translateZ(0);">
+                            <div
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black border border-bada flex items-center justify-center text-white font-bold text-lg md:text-xl mb-4 md:mb-6 shadow-[0_0_15px_rgba(55,106,181,0.5)] mx-auto md:mx-0">
+                                3</div>
+                            <h3
+                                class="text-lg md:text-xl font-serif font-bold text-white mb-2 md:mb-3 text-center md:text-left">
+                                Step 3. Speak with Confidence</h3>
+                            <p
+                                class="text-zinc-400 font-light text-xs md:text-sm leading-relaxed text-center md:text-left">
+                                Break the language barrier. Apply your skills in the real world and open doors to new
+                                academic and career opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Foreground Parting Image (Using absolute wrapper and overflow to halve the image) -->
+            <div class="absolute inset-0 z-20 pointer-events-none w-full h-full flex flex-col">
+                <div id="img-wrapper-top" class="w-full h-1/2 overflow-hidden relative"
+                    style="will-change: transform; backface-visibility: hidden; transform-style: preserve-3d; transform: translateZ(0);">
+                    <!-- Top half of the image -->
+                    <img src="비행기 사진.png" alt="Loop Split Top"
+                        class="absolute top-0 left-0 w-full h-[200%] object-cover object-center"
+                        style="will-change: transform; backface-visibility: hidden; transform: translateZ(0);">
+                </div>
+                <div id="img-wrapper-bottom" class="w-full overflow-hidden relative"
+                    style="height: calc(50% + 1px); margin-top: -1px; will-change: transform; backface-visibility: hidden; transform-style: preserve-3d; transform: translateZ(0);">
+                    <!-- Bottom half of the image. Pulled up by 100% of its container (which is 50% of the screen) to align perfectly with the top half -->
+                    <img src="비행기 사진.png" alt="Loop Split Bottom"
+                        class="absolute top-[-100%] left-0 w-full h-[200%] object-cover object-center"
+                        style="will-change: transform; backface-visibility: hidden; transform: translateZ(0);">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Level Test Section -->
+    <section id="level-test" class="py-12 bg-white relative border-b border-gray-100">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-8 reveal active">
+                <span class="text-bada font-semibold tracking-widest uppercase text-sm mb-3 block">Are You Ready?</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-gray-900">Discover Your <span
+                        class="gradient-text">Korean Level</span></h2>
+                <div class="w-16 h-1 bg-bada mx-auto mt-6 rounded-full opacity-80"></div>
+                <p class="mt-4 text-gray-500 font-light max-w-2xl mx-auto text-base">Take our comprehensive placement
+                    test
+                    to find out which Bada BLI course is perfectly suited for your current skills.</p>
+            </div>
+
+            <div
+                class="max-w-4xl mx-auto rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(35,80,142,0.15)] border border-gray-100 reveal delay-100 bg-white relative group">
+                <!-- Decorative Top Bar -->
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-accent z-10"></div>
+
+                <iframe src="level-test/index.html" class="w-full h-[700px] border-none bg-gray-50/30 relative z-0"
+                    title="Bada BLI Korean Level Test"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course 1 -->
+    <section class="pt-32 pb-20 bg-gray-50 relative">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="mb-16 reveal relative">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4 relative z-10">Course 1: General
+                    Korean <span class="text-bada font-medium text-2xl">(6 Levels)</span></h2>
+                <h3 class="text-xl text-gray-500 font-light">From First Steps to Fluency</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Level 1-2 -->
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:-translate-y-2 transition-transform duration-500 reveal relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1.5 bg-bada opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="text-bada font-bold font-serif text-3xl mb-2">Level 1-2</div>
+                    <div
+                        class="uppercase tracking-widest text-xs font-semibold text-gray-400 mb-6 pb-4 border-b border-gray-100">
+                        Beginner</div>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        <strong class="text-gray-900 font-medium block mb-2">Master Hangeul and survive daily
+                            life—</strong>
+                        ordering food, introducing yourself, and basic shopping.
+                    </p>
+                </div>
+                <!-- Level 3-4 -->
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:-translate-y-2 transition-transform duration-500 reveal delay-100 relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1.5 bg-bada opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="text-bada font-bold font-serif text-3xl mb-2">Level 3-4</div>
+                    <div
+                        class="uppercase tracking-widest text-xs font-semibold text-gray-400 mb-6 pb-4 border-b border-gray-100">
+                        Intermediate</div>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        <strong class="text-gray-900 font-medium block mb-2">Handle social situations with
+                            ease.</strong>
+                        Express opinions on familiar topics and understand Korean social nuances.
+                    </p>
+                </div>
+                <!-- Level 5-6 -->
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:-translate-y-2 transition-transform duration-500 reveal delay-200 relative overflow-hidden group">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1.5 bg-bada opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <div class="text-bada font-bold font-serif text-3xl mb-2">Level 5-6</div>
+                    <div
+                        class="uppercase tracking-widest text-xs font-semibold text-gray-400 mb-6 pb-4 border-b border-gray-100">
+                        Advanced</div>
+                    <p class="text-gray-600 font-light leading-relaxed">
+                        <strong class="text-gray-900 font-medium block mb-2">Professional & Academic mastery.</strong>
+                        Discuss complex issues like politics, economy, and culture with the precision of a local.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-white rounded-3xl p-10 md:p-12 text-center shadow-sm border border-gray-100 reveal">
+                <i class="ph ph-chat-circle-text text-4xl text-bada mb-4"></i>
+                <p class="text-2xl font-serif text-gray-900 leading-relaxed max-w-4xl mx-auto">
+                    "Stop memorizing, <strong class="text-bada">start connecting.</strong> Our 6-step roadmap takes you
+                    from a curious beginner to a confident communicator."
+                </p>
+                <div class="mt-8">
+                    <a href="#"
+                        class="inline-block bg-bada text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-bada-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        Enroll in Success
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course 2 (Animated) -->
+    <section id="course2-animated" class="bg-bada relative border-t border-bada-dark" style="height: 400vh;">
+        <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center">
+
+            <div
+                class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row relative z-10 h-full items-center justify-between">
+
+                <!-- Left Content: Dynamic Text (Desktop) & Static Fallback (Mobile) -->
+                <div
+                    class="w-full md:w-[45%] relative z-20 pt-32 md:pt-0 h-[55%] md:h-full flex flex-col justify-start md:justify-center">
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-2 md:mb-4 relative z-10">Course
+                        2: TOPIK <span class="text-white/80 text-xl md:text-3xl font-medium block mt-1 md:mt-2">(3
+                            Semesters)</span></h2>
+                    <h3 class="text-lg md:text-xl text-white/60 font-light mb-8 md:mb-16 tracking-wide">Strategy,
+                        Practice, Success</h3>
+
+                    <!-- Dynamic Texts that fade in/out (Desktop & Mobile Sync) -->
+                    <div class="relative h-[250px] md:h-64 mt-8 md:mt-0">
+                        <!-- Semester 1 Text -->
+                        <div class="orbit-text-content absolute inset-0 active flex flex-col items-start"
+                            id="text-sem-1">
+                            <h5 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><i
+                                    class="ph ph-target text-white/40 text-3xl"></i> Focus: The Foundation</h5>
+                            <p class="text-white/80 font-light leading-relaxed text-lg">
+                                Perfecting Levels 1-2. Listening and Reading strategies for a high score in the basic
+                                exam.
+                            </p>
+                            <p
+                                class="mt-6 text-white font-bold uppercase tracking-widest text-sm bg-white/10 backdrop-blur-sm inline-block px-4 py-2 rounded-lg mb-6">
+                                Target: TOPIK I</p>
+                            <a href="#"
+                                class="inline-block bg-white text-bada px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:-translate-y-1">
+                                Enroll in Success
+                            </a>
+                        </div>
+                        <!-- Semester 2 Text -->
+                        <div class="orbit-text-content absolute inset-0 flex flex-col items-start" id="text-sem-2">
+                            <h5 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><i
+                                    class="ph ph-pen-nib text-white/40 text-3xl"></i> Focus: The Bridge</h5>
+                            <p class="text-white/80 font-light leading-relaxed text-lg">
+                                Conquering the 54-item writing challenge. Intensive practice for Levels 3-4 logic and
+                                vocabulary.
+                            </p>
+                            <p
+                                class="mt-6 text-white font-bold uppercase tracking-widest text-sm bg-white/10 backdrop-blur-sm inline-block px-4 py-2 rounded-lg mb-6">
+                                Target: TOPIK II (Intermediate)</p>
+                            <a href="#"
+                                class="inline-block bg-white text-bada px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:-translate-y-1">
+                                Enroll in Success
+                            </a>
+                        </div>
+                        <!-- Semester 3 Text -->
+                        <div class="orbit-text-content absolute inset-0 flex flex-col items-start" id="text-sem-3">
+                            <h5 class="text-2xl font-bold text-white mb-4 flex items-center gap-3"><i
+                                    class="ph ph-exam text-white/40 text-3xl"></i> Focus: The Mastery</h5>
+                            <p class="text-white/80 font-light leading-relaxed text-lg">
+                                Precision in academic reading and professional writing. Mock tests under real exam
+                                pressure for Levels 5-6.
+                            </p>
+                            <p
+                                class="mt-6 text-white font-bold uppercase tracking-widest text-sm bg-white/10 backdrop-blur-sm inline-block px-4 py-2 rounded-lg mb-6">
+                                Target: TOPIK II (Advanced)</p>
+                            <a href="#"
+                                class="inline-block bg-white text-bada px-6 py-3 rounded-full font-semibold text-base hover:bg-gray-100 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:-translate-y-1">
+                                Enroll in Success
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content: The Orbit -->
+                <div class="absolute left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-25%] top-auto md:top-1/2 bottom-0 md:bottom-auto translate-y-[20%] md:-translate-y-1/2 w-[340px] h-[340px] md:w-[800px] md:h-[800px] pointer-events-none z-10 opacity-100"
+                    id="orbit-wrapper">
+                    <div class="w-full h-full rounded-full border border-dashed border-white/30 md:border-2"
+                        id="orbit-container">
+                        <!-- Orbit Items (Cards) -->
+                        <div class="orbit-item bg-white/10 backdrop-blur-md border border-white/20 shadow-xl p-4 md:p-6 rounded-2xl flex flex-col justify-center text-white text-center absolute top-1/2 left-1/2"
+                            id="card-sem-1">
+                            <div
+                                class="text-white/60 uppercase tracking-widest text-[10px] md:text-xs font-bold mb-1 md:mb-2">
+                                Semester 1
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-serif font-bold mb-1">The Foundation</h4>
+                            <div class="text-white/80 font-light text-xs md:text-sm">TOPIK I Mastery</div>
+                        </div>
+
+                        <div class="orbit-item bg-white/10 backdrop-blur-md border border-white/20 shadow-xl p-4 md:p-6 rounded-2xl flex flex-col justify-center text-white text-center absolute top-1/2 left-1/2"
+                            id="card-sem-2">
+                            <div
+                                class="text-white/60 uppercase tracking-widest text-[10px] md:text-xs font-bold mb-1 md:mb-2">
+                                Semester 2
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-serif font-bold mb-1">The Bridge</h4>
+                            <div class="text-white/80 font-light text-xs md:text-sm">TOPIK II Intermediate</div>
+                        </div>
+
+                        <div class="orbit-item bg-white/10 backdrop-blur-md border border-white/20 shadow-xl p-4 md:p-6 rounded-2xl flex flex-col justify-center text-white text-center absolute top-1/2 left-1/2"
+                            id="card-sem-3">
+                            <div
+                                class="text-white/60 uppercase tracking-widest text-[10px] md:text-xs font-bold mb-1 md:mb-2">
+                                Semester 3
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-serif font-bold mb-1">The Mastery</h4>
+                            <div class="text-white/80 font-light text-xs md:text-sm">TOPIK II Advanced</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Call to action, fixed relative to sticky viewport -->
+            <div class="absolute bottom-10 left-0 w-full z-30">
+                <div class="container mx-auto px-6 md:px-12 flex justify-between items-end md:items-center">
+                    <p class="text-white/80 font-serif italic text-lg max-w-sm hidden md:block">
+                        "Don't just study for the test. <strong class="text-white">Beat the test.</strong>"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-bada relative overflow-hidden pt-20 pb-10 border-t-4 border-white/10">
+        <!-- Subtle background pattern -->
+        <div class="absolute inset-0 opacity-5"
+            style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;">
+        </div>
+
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="flex flex-col items-center text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-serif font-bold text-white mb-6">Ready to dive in?</h2>
+                <div
+                    class="w-full flex max-w-md bg-white/10 p-1 rounded-full backdrop-blur-sm shadow-inner mb-8 border border-white/20">
+                    <input type="email" placeholder="Enter your email"
+                        class="flex-1 bg-transparent px-6 py-3 text-white placeholder-white/60 focus:outline-none text-sm border-none">
+                    <button
+                        class="bg-white text-bada px-8 py-3 rounded-full font-semibold text-sm hover:bg-gray-100 transition-colors shadow-lg">Subscribe</button>
+                </div>
+            </div>
+
+            <div class="border-t border-white/20 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-2xl font-serif font-bold text-white opacity-90 tracking-widest">
+                    Bada BLI
+                </div>
+
+                <div
+                    class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-white/80 text-sm font-light tracking-wide">
+                    <span>Company Name : Bada BLI</span>
+                    <span class="hidden md:inline text-white/40">|</span>
+                    <span>Director : Jinjoo KWON</span>
+                    <span class="hidden md:inline text-white/40">|</span>
+                    <span>ACN: 123-12-12345</span>
+                    <span class="hidden md:inline text-white/40">|</span>
+                    <a href="mailto:info@badaglobal.com" class="hover:text-white transition-colors">Email :
+                        info@badaglobal.com</a>
+                </div>
+
+                <div class="text-white/50 text-xs mt-4 md:mt-0">
+                    &copy; 2026 Bada BLI. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll Reveal Animation Builder
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        setTimeout(reveal, 100);
+
+        // Path to Mastery Cinematic Split Reveal Animation
+        const pathSection = document.getElementById('path-to-mastery');
+        const imgWrapperTop = document.getElementById('img-wrapper-top');
+        const imgWrapperBottom = document.getElementById('img-wrapper-bottom');
+        const revealContent = document.getElementById('path-reveal-content');
+        const pathCards = document.querySelectorAll('.path-card');
+
+        let currentScrollPath = 0;
+        let targetScrollPath = 0;
+
+        function animateSplitReveal() {
+            if (pathSection && imgWrapperTop && imgWrapperBottom) {
+                // Smooth interpolation between actual scroll and animated value
+                currentScrollPath += (targetScrollPath - currentScrollPath) * 0.08;
+
+                // 1. Image Splitting (0% to ~60% scroll)
+                const splitProgress = Math.min(1, currentScrollPath * 1.6);
+                const yOffset = splitProgress * 110; // Move up to 110% of container height to ensure it clears
+
+                imgWrapperTop.style.transform = `translateY(-${yOffset}%)`;
+                imgWrapperBottom.style.transform = `translateY(${yOffset}%)`;
+
+                // 2. Reveal Overall Content Wrapper (Starts fading in slightly after split begins)
+                if (currentScrollPath > 0.1) {
+                    revealContent.style.pointerEvents = 'auto'; // allow interaction
+                    const contentOp = Math.min(1, (currentScrollPath - 0.1) * 3);
+                    const contentY = Math.max(0, 40 - (currentScrollPath - 0.1) * 120);
+
+                    revealContent.style.opacity = contentOp;
+                    revealContent.style.transform = `translateY(${contentY}px)`;
+                } else {
+                    revealContent.style.pointerEvents = 'none';
+                    revealContent.style.opacity = 0;
+                    revealContent.style.transform = `translateY(40px)`;
+                }
+
+                // 3. Staggered Card Reveal (From 40% scroll onwards)
+                pathCards.forEach((card, index) => {
+                    const start = 0.4 + (index * 0.1);
+                    const end = start + 0.25;
+
+                    let cardFraction = (currentScrollPath - start) / (end - start);
+                    cardFraction = Math.max(0, Math.min(1, cardFraction));
+
+                    // Cubic Ease Out
+                    const easeOut = 1 - Math.pow(1 - cardFraction, 3);
+
+                    if (easeOut > 0.001) {
+                        card.style.opacity = easeOut;
+                        const cardYOffset = 48 * (1 - easeOut); // translate-y-12 is 3rem=48px
+                        card.style.transform = `translateY(${cardYOffset}px)`;
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = `translateY(48px)`;
+                    }
+                });
+            }
+            requestAnimationFrame(animateSplitReveal);
+        }
+
+        if (pathSection) {
+            animateSplitReveal();
+
+            window.addEventListener('scroll', () => {
+                const rect = pathSection.getBoundingClientRect();
+                const maxScroll = rect.height - window.innerHeight;
+                let scrollFraction = -rect.top / maxScroll;
+
+                if (scrollFraction < 0) scrollFraction = 0;
+                if (scrollFraction > 1) scrollFraction = 1;
+
+                targetScrollPath = scrollFraction;
+            }, { passive: true });
+        }
+
+        // Orbit Scroll Animation Logic 
+        const course2Section = document.getElementById('course2-animated');
+        const orbitContainer = document.getElementById('orbit-container');
+        const orbitItems = document.querySelectorAll('.orbit-item');
+        const textContents = document.querySelectorAll('.orbit-text-content');
+
+        // Initial angles dynamically handled in animateOrbit based on screen size
+        // We track target and animated rotation for smooth lerp
+        let targetOrbitRotation = 0;
+        let animatedOrbitRotation = 0;
+
+        if (course2Section && orbitContainer) {
+            window.addEventListener('scroll', () => {
+                const rect = course2Section.getBoundingClientRect();
+
+                // maxScroll is the total scrollable distance within the section
+                const maxScroll = rect.height - window.innerHeight;
+                let scrollFraction = -rect.top / maxScroll;
+
+                // Clamp between 0 and 1
+                if (scrollFraction < 0) scrollFraction = 0;
+                if (scrollFraction > 1) scrollFraction = 1;
+
+                // On mobile, items start at 270 and end at 350. To rotate 350 back to 270, we need -80 deg.
+                // On desktop, items start at 180 and end at 250. To rotate 250 back to 180, we need -70 deg.
+                const maxRotation = window.innerWidth < 768 ? -80 : -70;
+                targetOrbitRotation = scrollFraction * maxRotation;
+
+                // Calculate which text index is active based on fraction (0 to 0.33 -> 0, 0.33 to 0.66 -> 1...)
+                let activeIndex = 0;
+                if (scrollFraction > 0.4 && scrollFraction <= 0.8) activeIndex = 1;
+                else if (scrollFraction > 0.8) activeIndex = 2;
+
+                textContents.forEach((el, i) => {
+                    if (i === activeIndex) el.classList.add('active');
+                    else el.classList.remove('active');
+                });
+
+            }, { passive: true });
+        }
+
+        function animateOrbit() {
+            if (orbitContainer) {
+                const isMobile = window.innerWidth < 768;
+                const radius = isMobile ? 170 : 400;
+                const activeZone = isMobile ? 270 : 180;
+                const currentItemAngles = isMobile ? [270, 310, 350] : [180, 215, 250];
+
+                // Linear interpolation (Lerping)
+                animatedOrbitRotation += (targetOrbitRotation - animatedOrbitRotation) * 0.08;
+
+                // Rotate the container
+                orbitContainer.style.transform = `rotate(${animatedOrbitRotation}deg)`;
+
+                orbitItems.forEach((item, index) => {
+                    const itemAngle = currentItemAngles[index];
+
+                    // Current absolute angle of this item
+                    const currentAngle = itemAngle + animatedOrbitRotation;
+
+                    // Distance from active zone
+                    let dist = Math.abs(currentAngle - activeZone);
+                    if (dist > 180) dist = Math.abs(360 - dist);
+
+                    // Opacity math (fade out quickly as it leaves center)
+                    let op = 1 - (dist / 40);
+                    if (op < 0.2) op = 0.2;
+                    item.style.opacity = op;
+
+                    // Highlight Active Item
+                    if (dist < 15) {
+                        item.style.borderColor = 'rgba(255, 255, 255, 0.8)'; // Much brighter border
+                        item.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.4)'; // Deeper 3D shadow + inner highlight
+                        item.style.zIndex = 10;
+                        item.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 100%)'; // Stronger gradient
+                        // Counter-rotate by inverse of parent rotation + initial angle to keep upright!
+                        const scale = isMobile ? 1.05 : 1.15; // Larger scale
+                        item.style.transform = `rotate(${itemAngle}deg) translateX(${radius}px) rotate(${-itemAngle - animatedOrbitRotation}deg) scale(${scale})`;
+                    } else {
+                        item.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                        item.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+                        item.style.zIndex = 1;
+                        item.style.background = 'rgba(255, 255, 255, 0.05)';
+                        // Smaller scaling
+                        item.style.transform = `rotate(${itemAngle}deg) translateX(${radius}px) rotate(${-itemAngle - animatedOrbitRotation}deg) scale(0.85)`;
+                    }
+                });
+            }
+            requestAnimationFrame(animateOrbit);
+        }
+
+        // Start the continuous animation loop
+        animateOrbit();
+
+        // Navbar Scrolled State
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                // Scrolled down
+                navbar.classList.remove('bg-transparent');
+                navbar.classList.add('bg-bada', 'shadow-xl', 'backdrop-blur-md', 'bg-opacity-95');
+            } else {
+                // Top of page
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-bada', 'shadow-xl', 'backdrop-blur-md', 'bg-opacity-95');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
