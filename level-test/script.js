@@ -284,7 +284,7 @@ ui.btnNext.addEventListener('click', () => {
 });
 
 // ── Google Sheets Integration ────────────────────────────────
-const SHEET_URL = "https://script.google.com/macros/s/AKfycby-tmq5d_HdJ16HDXAQj02JQe6JbQDM-MTWx4xrzjXm28S2LnXuE0vjzl7C_Czom9ySDQ/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwX3UJpQOk5ITRQXfwQdl6lTuWR6pSNok7FWs8E69C4QPzuw5hSKJFmez0Xg1hqhtqEpg/exec";
 
 function sendToGoogleSheets(data) {
     const params = new URLSearchParams(data).toString();
@@ -316,10 +316,13 @@ function finishTest() {
 
     // Send results to Google Sheets
     const resultData = getResultData(state.score);
+    const purposeEl = document.getElementById('userPurpose');
+    const purposeText = purposeEl.options[purposeEl.selectedIndex].text;
     sendToGoogleSheets({
-        name: `${state.userFirstName} ${state.userLastName}`.trim(),
+        firstName: state.userFirstName,
+        lastName: state.userLastName,
         email: state.userEmail,
-        purpose: state.userPurpose,
+        purpose: purposeText,
         score: state.score,
         level: resultData.level,
         answers: state.answers.map((ans, i) =>
