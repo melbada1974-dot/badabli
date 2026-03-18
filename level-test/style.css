@@ -1209,6 +1209,30 @@ select option {
     margin-bottom: 5px;
 }
 
+/* Email Notice */
+.email-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(59, 130, 246, .1);
+    border: 1px solid rgba(59, 130, 246, .25);
+    border-radius: var(--radius);
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.82rem;
+    color: var(--text-2);
+    line-height: 1.5;
+}
+
+.email-notice span {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.email-notice p {
+    margin: 0;
+}
+
 /* CTA Section */
 .cta-section h3 {
     font-size: 1rem;

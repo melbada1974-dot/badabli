@@ -284,7 +284,7 @@ ui.btnNext.addEventListener('click', () => {
 });
 
 // ── Google Sheets Integration ────────────────────────────────
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbwX3UJpQOk5ITRQXfwQdl6lTuWR6pSNok7FWs8E69C4QPzuw5hSKJFmez0Xg1hqhtqEpg/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbyyAmmaobjVNZmNmfPxXIJEYUpxWi6B-Poc5aiSppAqz3QHTK0RLlC1hNiiZQvmxVfSpg/exec";
 
 function sendToGoogleSheets(data) {
     const params = new URLSearchParams(data).toString();
