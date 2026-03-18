@@ -283,6 +283,15 @@ ui.btnNext.addEventListener('click', () => {
     }
 });
 
+// ── Google Sheets Integration ────────────────────────────────
+const SHEET_URL = "https://script.google.com/macros/s/AKfycby-tmq5d_HdJ16HDXAQj02JQe6JbQDM-MTWx4xrzjXm28S2LnXuE0vjzl7C_Czom9ySDQ/exec";
+
+function sendToGoogleSheets(data) {
+    const params = new URLSearchParams(data).toString();
+    const img = new Image();
+    img.src = `${SHEET_URL}?${params}`;
+}
+
 // ── Finish Test ──────────────────────────────────────────────
 function finishTest() {
     switchScreen('loading');
@@ -304,6 +313,19 @@ function finishTest() {
         }
     });
     state.score = Math.min(100, total);
+
+    // Send results to Google Sheets
+    const resultData = getResultData(state.score);
+    sendToGoogleSheets({
+        name: `${state.userFirstName} ${state.userLastName}`.trim(),
+        email: state.userEmail,
+        purpose: state.userPurpose,
+        score: state.score,
+        level: resultData.level,
+        answers: state.answers.map((ans, i) =>
+            ans === state.questions[i].answer ? "O" : "X"
+        ).join("")
+    });
 
     setTimeout(() => {
         resetLoadingSteps();
