@@ -820,6 +820,149 @@
         </script>
     </section>
 
+    <!-- APC Campus Principal — Zoom Parallax -->
+    <style>
+        .principal-section { position: relative; }
+        .principal-sticky {
+            height: 100dvh; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            background: #060810;
+            perspective: 1000px;
+        }
+        .principal-layer {
+            position: absolute;
+            will-change: transform;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .principal-layer-bg {
+            inset: -20%; z-index: 1;
+            background: radial-gradient(ellipse at 50% 40%, #162040 0%, #060810 70%);
+        }
+        .principal-layer-mid {
+            inset: 0; z-index: 2;
+        }
+        .principal-shape {
+            position: absolute; border-radius: 50%; opacity: 0.12;
+        }
+        .principal-shape-1 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, #376ab5 0%, transparent 70%);
+            top: 15%; left: 10%;
+        }
+        .principal-shape-2 {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, #6a7fff 0%, transparent 70%);
+            top: 60%; right: 15%;
+        }
+        .principal-layer-fg {
+            inset: 0; z-index: 3;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .principal-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 10vw, 120px);
+            font-weight: 700; letter-spacing: -0.03em;
+            text-align: center; line-height: 0.95;
+            color: #fff; opacity: 0.9;
+        }
+        .principal-layer-reveal {
+            inset: 0; z-index: 4;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            opacity: 0;
+        }
+        .principal-card {
+            text-align: center; max-width: 500px; padding: 40px 32px;
+        }
+        .principal-photo {
+            width: 200px; height: 200px;
+            border-radius: 50%; object-fit: cover; object-position: top;
+            border: 3px solid rgba(255,255,255,0.15);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            margin: 0 auto 20px;
+        }
+        .principal-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(22px, 3vw, 30px);
+            font-weight: 700; color: #fff; margin-bottom: 4px;
+        }
+        .principal-role {
+            font-size: 12px; color: rgba(255,255,255,0.45);
+            letter-spacing: 0.15em; text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .principal-message {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(16px, 2vw, 20px);
+            font-style: italic; color: rgba(255,255,255,0.8);
+            line-height: 1.7; margin-bottom: 16px;
+            position: relative;
+        }
+        .principal-message::before {
+            content: '\201C'; font-size: 60px; font-style: normal;
+            color: rgba(55,106,181,0.3); position: absolute;
+            top: -30px; left: -16px; font-family: 'Playfair Display', serif;
+        }
+        .principal-body {
+            font-size: 14px; color: rgba(255,255,255,0.45);
+            line-height: 1.7; font-weight: 300;
+        }
+        @media (max-width: 768px) {
+            .principal-photo { width: 150px; height: 150px; }
+            .principal-shape-1 { display: none; }
+        }
+    </style>
+
+    <section class="principal-section">
+        <div class="principal-sticky" id="principalSticky">
+            <div class="principal-layer principal-layer-bg" id="principalBg"></div>
+            <div class="principal-layer principal-layer-mid" id="principalMid">
+                <div class="principal-shape principal-shape-1"></div>
+                <div class="principal-shape principal-shape-2"></div>
+            </div>
+            <div class="principal-layer principal-layer-fg" id="principalFg">
+                <div class="principal-headline">MEET OUR<br>PRINCIPAL</div>
+            </div>
+            <div class="principal-layer principal-layer-reveal" id="principalReveal">
+                <div class="principal-card">
+                    <img src="campus/principal.jpeg" alt="Myra Castillo, APC Campus Principal" class="principal-photo">
+                    <h3 class="principal-name">Myra Castillo</h3>
+                    <p class="principal-role">Principal, APC Campus Philippines</p>
+                    <p class="principal-message">
+                        At APC, we don't just teach Korean — we build confidence, open minds, and create a home away from home for every student who walks through our doors.
+                    </p>
+                    <p class="principal-body">
+                        With years of experience in international education, Myra leads Bada BLI's Philippines campus with a passion for bridging cultures. Under her guidance, APC has become a vibrant hub where Filipino students discover the joy of Korean language and culture.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    (function(){
+        var ps = document.querySelector('.principal-sticky');
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ps,
+                start: 'top top',
+                end: '+=300%',
+                scrub: 0.5,
+                pin: true,
+                pinSpacing: true
+            }
+        });
+        // 배경 살짝 확대
+        tl2.fromTo('#principalBg', { scale: 1 }, { scale: 1.15, ease: 'none' }, 0);
+        // 중간 레이어 확대 + 위로 이동
+        tl2.fromTo('#principalMid', { scale: 1, y: 0 }, { scale: 1.6, y: -80, ease: 'none' }, 0);
+        // "MEET OUR PRINCIPAL" 줌인 + 페이드아웃 (0~50%)
+        tl2.fromTo('#principalFg', { scale: 1, opacity: 0.9 }, { scale: 6, opacity: 0, ease: 'none' }, 0);
+        // 인물 카드 등장 (40~60%)
+        tl2.fromTo('#principalReveal', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, ease: 'power2.out' }, 0.4);
+    })();
+    </script>
+
     <!-- Program List Section -->
     <section id="program" class="py-32 bg-gray-50 relative">
         <div class="container mx-auto px-6 md:px-12">
