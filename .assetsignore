@@ -1,0 +1,11 @@
+.git
+.gitignore
+.assetsignore
+.playwright-mcp
+.DS_Store
+Bada Bli 필리핀
+IMG_7658.PNG
+IMG_7659.PNG
+IMG_7660.PNG
+node_modules
+wrangler.jsonc
