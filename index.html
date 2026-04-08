@@ -252,6 +252,130 @@
         </div>
     </section>
 
+    <!-- Director Message — Curtain Reveal -->
+    <style>
+        .director-section { position: relative; }
+        .director-sticky {
+            height: 100dvh; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            background: #0a0f1e;
+        }
+        .director-curtain-left, .director-curtain-right {
+            position: absolute; top: 0; bottom: 0; width: 50%;
+            background: #0a0f1e; z-index: 2;
+            display: flex; align-items: center;
+        }
+        .director-curtain-left {
+            left: 0; justify-content: flex-end; padding-right: 24px;
+            border-right: 1px solid rgba(255,255,255,0.08);
+        }
+        .director-curtain-right {
+            right: 0; justify-content: flex-start; padding-left: 24px;
+            border-left: 1px solid rgba(255,255,255,0.08);
+        }
+        .director-curtain-left h2, .director-curtain-right h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 6vw, 72px);
+            font-weight: 700; letter-spacing: -0.03em; line-height: 0.95;
+            color: #fff;
+        }
+        .director-content {
+            position: absolute; inset: 0; z-index: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0d1528, #162040);
+            padding: 40px 24px;
+        }
+        .director-photo {
+            width: 180px; height: 180px;
+            border-radius: 50%; object-fit: cover; object-position: top;
+            border: 3px solid rgba(255,255,255,0.15);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            margin-bottom: 24px;
+        }
+        .director-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(22px, 3vw, 32px);
+            font-weight: 700; color: #fff; margin-bottom: 4px;
+        }
+        .director-title {
+            font-size: 13px; color: rgba(255,255,255,0.5);
+            letter-spacing: 0.15em; text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .director-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 2.5vw, 26px);
+            font-weight: 400; font-style: italic;
+            color: rgba(255,255,255,0.85);
+            max-width: 580px; line-height: 1.7;
+            margin-bottom: 20px; position: relative;
+        }
+        .director-quote::before {
+            content: '\201C'; font-size: 80px; font-style: normal;
+            color: rgba(55,106,181,0.3); position: absolute;
+            top: -40px; left: -20px; font-family: 'Playfair Display', serif;
+        }
+        .director-body {
+            font-size: 15px; color: rgba(255,255,255,0.5);
+            max-width: 500px; line-height: 1.7; font-weight: 300;
+        }
+        .director-cta {
+            margin-top: 28px; display: inline-flex; align-items: center; gap: 8px;
+            color: #376ab5; font-weight: 600; font-size: 14px;
+            text-decoration: none; transition: color 0.2s;
+        }
+        .director-cta:hover { color: #fff; }
+        @media (max-width: 768px) {
+            .director-photo { width: 140px; height: 140px; }
+            .director-curtain-left h2, .director-curtain-right h2 {
+                font-size: clamp(20px, 8vw, 40px);
+            }
+        }
+    </style>
+
+    <section class="director-section">
+        <div class="director-sticky">
+            <div class="director-content">
+                <img src="campus/director.jpeg" alt="Ricky LEE, Director" class="director-photo">
+                <h3 class="director-name">Ricky LEE</h3>
+                <p class="director-title">Director, Bada BLI</p>
+                <p class="director-quote">
+                    Learning Korean is not just about language — it is about opening a door to a new world of opportunity, culture, and human connection.
+                </p>
+                <p class="director-body">
+                    At Bada BLI, we believe every student deserves a clear, personalized path to fluency. From our campuses in Australia and the Philippines, we are building bridges between cultures — one student at a time. I invite you to take the first step with us.
+                </p>
+                <a href="https://wa.me/61415300229?text=Hi%2C%20I%E2%80%99d%20like%20to%20learn%20more%20about%20Bada%20BLI." target="_blank" class="director-cta">
+                    Chat with us <span>→</span>
+                </a>
+            </div>
+            <div class="director-curtain-left" id="directorLeft"><h2>DIRECTOR</h2></div>
+            <div class="director-curtain-right" id="directorRight"><h2>MESSAGE</h2></div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+    (function(){
+        gsap.registerPlugin(ScrollTrigger);
+        var s = document.querySelector('.director-sticky');
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: s,
+                start: 'top top',
+                end: '+=150%',
+                scrub: 0.5,
+                pin: true,
+                pinSpacing: true
+            }
+        });
+        tl.to('#directorLeft', { xPercent: -100, ease: 'power2.inOut' }, 0);
+        tl.to('#directorRight', { xPercent: 100, ease: 'power2.inOut' }, 0);
+    })();
+    </script>
+
     <!-- Why Learn Korean Now Section -->
     <section id="why-korean" class="py-32 bg-bada relative overflow-hidden text-white">
         <div class="container mx-auto px-6 md:px-12 relative z-10">
@@ -333,6 +457,367 @@
 
             </div>
         </div>
+    </section>
+
+    <!-- APC Campus Photos — Sticky Cards -->
+    <style>
+        .campus-sticky-card {
+            position: sticky;
+            height: 70vh;
+            min-height: 400px;
+            max-height: 600px;
+            background-size: cover;
+            background-position: center;
+            transition: box-shadow 0.3s ease;
+        }
+        .campus-card-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.05) 100%);
+        }
+        @media (max-width: 640px) {
+            .campus-sticky-card {
+                height: 55vh;
+                min-height: 300px;
+                max-height: 450px;
+            }
+        }
+    </style>
+
+    <section class="bg-white py-20 sm:py-28">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-14 sm:mb-20">
+                <p class="uppercase tracking-[0.2em] text-sm font-medium mb-4 text-bada">APC Campus, Philippines</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-5 leading-tight">Where Culture Meets Classroom</h2>
+                <p class="text-base sm:text-lg text-gray-500 max-w-xl mx-auto leading-relaxed font-light">Experience Korean language and culture in our immersive campus environment.</p>
+            </div>
+
+            <div class="relative">
+                <div class="campus-sticky-card rounded-2xl overflow-hidden shadow-xl mb-6 sm:mb-8" style="top: 80px; background-image: url('campus/campus-1-certificate.jpeg');">
+                    <div class="campus-card-overlay absolute inset-0 rounded-2xl"></div>
+                    <div class="relative h-full flex items-end p-6 sm:p-8">
+                        <p class="text-white text-base sm:text-lg font-medium drop-shadow-lg">Achieving milestones, one level at a time</p>
+                    </div>
+                </div>
+
+                <div class="campus-sticky-card rounded-2xl overflow-hidden shadow-xl mb-6 sm:mb-8" style="top: 100px; background-image: url('campus/campus-2-graduation.jpeg');">
+                    <div class="campus-card-overlay absolute inset-0 rounded-2xl"></div>
+                    <div class="relative h-full flex items-end p-6 sm:p-8">
+                        <p class="text-white text-base sm:text-lg font-medium drop-shadow-lg">Celebrating success together</p>
+                    </div>
+                </div>
+
+                <div class="campus-sticky-card rounded-2xl overflow-hidden shadow-xl mb-6 sm:mb-8" style="top: 120px; background-image: url('campus/campus-3-hanbok.jpeg');">
+                    <div class="campus-card-overlay absolute inset-0 rounded-2xl"></div>
+                    <div class="relative h-full flex items-end p-6 sm:p-8">
+                        <p class="text-white text-base sm:text-lg font-medium drop-shadow-lg">Living the culture, not just learning it</p>
+                    </div>
+                </div>
+
+                <div class="campus-sticky-card rounded-2xl overflow-hidden shadow-xl" style="top: 140px; background-image: url('campus/campus-4-banner.jpeg');">
+                    <div class="campus-card-overlay absolute inset-0 rounded-2xl"></div>
+                    <div class="relative h-full flex items-end p-6 sm:p-8">
+                        <p class="text-white text-lg sm:text-xl font-semibold drop-shadow-lg">Bada BLI — Raising Next Generations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Life Videos — Accordion Slider -->
+    <style>
+        .accordion-strip {
+            flex: 1;
+            min-width: 0;
+            transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .accordion-strip:hover { flex: 4; }
+        .accordion-strip.is-active { flex: 4; }
+        .accordion-strip video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .strip-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 1.5rem 0.75rem;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .strip-overlay.is-hidden { opacity: 0; }
+        .play-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: auto;
+            margin-top: auto;
+            pointer-events: auto;
+            transition: transform 0.2s ease, background 0.2s ease;
+            flex-shrink: 0;
+        }
+        .play-btn:hover {
+            transform: scale(1.1);
+            background: #fff;
+        }
+        .play-btn svg {
+            width: 24px;
+            height: 24px;
+            margin-left: 3px;
+            fill: #23508e;
+        }
+        .strip-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-align: center;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
+        }
+        .accordion-strip:hover .strip-label,
+        .accordion-strip.is-active .strip-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .strip-index {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+            z-index: 2;
+        }
+        @media (max-width: 768px) {
+            .accordion-container {
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 1rem !important;
+                height: auto !important;
+                padding: 0 1rem;
+                scrollbar-width: none;
+            }
+            .accordion-container::-webkit-scrollbar { display: none; }
+            .accordion-strip {
+                flex: none !important;
+                width: 75vw;
+                aspect-ratio: 9 / 16;
+                scroll-snap-align: center;
+                border-radius: 1rem;
+                height: auto;
+            }
+            .accordion-strip:hover { flex: none !important; }
+            .strip-label {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <section id="campus-life" class="relative py-20 md:py-28 overflow-hidden" style="background-color: #1a3d6e;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-white/50 mb-4">Campus Life</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-white mb-4">See Our Campus in Action</h2>
+                <p class="text-base md:text-lg text-white/60 max-w-xl mx-auto font-light">Discover what daily life looks like at Bada BLI Philippines.</p>
+            </div>
+
+            <div class="accordion-container flex gap-3" style="height: 500px;">
+                <div class="accordion-strip" data-src="campus/video-1.mp4">
+                    <video preload="metadata" muted playsinline loop style="pointer-events: none;">
+                        <source data-src="campus/video-1.mp4" type="video/mp4">
+                    </video>
+                    <span class="strip-index">01</span>
+                    <div class="strip-overlay">
+                        <button class="play-btn" aria-label="Play Campus Tour video">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <span class="strip-label">Campus Tour</span>
+                    </div>
+                </div>
+
+                <div class="accordion-strip" data-src="campus/video-2.mp4">
+                    <video preload="metadata" muted playsinline loop style="pointer-events: none;">
+                        <source data-src="campus/video-2.mp4" type="video/mp4">
+                    </video>
+                    <span class="strip-index">02</span>
+                    <div class="strip-overlay">
+                        <button class="play-btn" aria-label="Play Student Life video">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <span class="strip-label">Student Life</span>
+                    </div>
+                </div>
+
+                <div class="accordion-strip" data-src="campus/video-3.mp4">
+                    <video preload="metadata" muted playsinline loop style="pointer-events: none;">
+                        <source data-src="campus/video-3.mp4" type="video/mp4">
+                    </video>
+                    <span class="strip-index">03</span>
+                    <div class="strip-overlay">
+                        <button class="play-btn" aria-label="Play Korean Culture Class video">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <span class="strip-label">Korean Culture Class</span>
+                    </div>
+                </div>
+
+                <div class="accordion-strip" data-src="campus/video-4.mp4">
+                    <video preload="metadata" muted playsinline loop style="pointer-events: none;">
+                        <source data-src="campus/video-4.mp4" type="video/mp4">
+                    </video>
+                    <span class="strip-index">04</span>
+                    <div class="strip-overlay">
+                        <button class="play-btn" aria-label="Play Graduation Day video">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <span class="strip-label">Graduation Day</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        (function() {
+            var strips = document.querySelectorAll('.accordion-strip');
+            var isMobile = window.matchMedia('(max-width: 768px)');
+            var activeVideo = null;
+
+            function loadVideo(strip) {
+                var video = strip.querySelector('video');
+                var source = video.querySelector('source');
+                if (source.dataset.src && !source.getAttribute('src')) {
+                    source.setAttribute('src', source.dataset.src);
+                    video.load();
+                }
+                return video;
+            }
+
+            function resetAllVideos(except) {
+                strips.forEach(function(s) {
+                    if (s === except) return;
+                    var v = s.querySelector('video');
+                    var overlay = s.querySelector('.strip-overlay');
+                    v.pause();
+                    v.currentTime = 0;
+                    v.controls = false;
+                    v.style.pointerEvents = 'none';
+                    overlay.classList.remove('is-hidden');
+                    s.classList.remove('is-active');
+                });
+                if (except === null) activeVideo = null;
+            }
+
+            var userClicked = false;
+
+            strips.forEach(function(strip) {
+                strip.addEventListener('mouseenter', function() {
+                    if (isMobile.matches || userClicked) return;
+                    resetAllVideos(strip);
+                    var video = loadVideo(strip);
+                    var overlay = strip.querySelector('.strip-overlay');
+                    strip.classList.add('is-active');
+                    overlay.classList.add('is-hidden');
+                    video.muted = true;
+                    video.play();
+                    activeVideo = video;
+                });
+
+                strip.addEventListener('mouseleave', function() {
+                    if (isMobile.matches || userClicked) return;
+                    var video = strip.querySelector('video');
+                    var overlay = strip.querySelector('.strip-overlay');
+                    video.pause();
+                    video.currentTime = 0;
+                    video.controls = false;
+                    video.style.pointerEvents = 'none';
+                    overlay.classList.remove('is-hidden');
+                    strip.classList.remove('is-active');
+                    activeVideo = null;
+                });
+
+                strip.querySelector('.play-btn').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var video = loadVideo(strip);
+                    var overlay = strip.querySelector('.strip-overlay');
+
+                    // If user already clicked and video is playing with sound → pause
+                    if (userClicked && activeVideo === video && !video.paused) {
+                        video.pause();
+                        video.controls = false;
+                        video.muted = true;
+                        video.style.pointerEvents = 'none';
+                        overlay.classList.remove('is-hidden');
+                        strip.classList.remove('is-active');
+                        activeVideo = null;
+                        userClicked = false;
+                        return;
+                    }
+
+                    // Switch from hover-preview to full playback with sound
+                    userClicked = true;
+                    resetAllVideos(strip);
+                    strip.classList.add('is-active');
+                    overlay.classList.add('is-hidden');
+                    video.muted = false;
+                    video.controls = true;
+                    video.style.pointerEvents = 'auto';
+                    video.play();
+                    activeVideo = video;
+                });
+
+                strip.querySelector('video').addEventListener('ended', function() {
+                    var overlay = strip.querySelector('.strip-overlay');
+                    this.controls = false;
+                    this.muted = true;
+                    this.style.pointerEvents = 'none';
+                    overlay.classList.remove('is-hidden');
+                    strip.classList.remove('is-active');
+                    activeVideo = null;
+                    userClicked = false;
+                });
+
+                if ('IntersectionObserver' in window) {
+                    var observer = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting) {
+                                loadVideo(entry.target);
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { rootMargin: '200px' });
+                    observer.observe(strip);
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.accordion-strip')) {
+                    resetAllVideos(null);
+                    userClicked = false;
+                }
+            });
+        })();
+        </script>
     </section>
 
     <!-- Program List Section -->
