@@ -142,34 +142,54 @@
        ============================================================ -->
   <section id="hero" class="relative h-screen w-full overflow-hidden flex flex-col">
 
-    <!-- Background Image -->
+    <!-- Background Video (loops infinitely, muted, no controls) -->
     <div class="absolute inset-0 z-0">
-      <img
-        src="/bada%20bli%20hero%20sample%20pic.png"
-        alt="K-Culture program hero — performers on stage"
+      <video
+        autoplay muted loop playsinline
+        poster="/bada%20bli%20hero%20sample%20pic.png"
         class="w-full h-full object-cover object-center"
-      />
+      >
+        <source src="/k-culture/hero-video.mp4" type="video/mp4">
+      </video>
       <!-- Dark Gradient Overlay -->
       <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0A0A0A]"></div>
     </div>
 
-    <!-- Top Bar -->
-    <header class="relative z-10 flex items-center justify-between px-6 sm:px-10 pt-6 sm:pt-8">
-      <!-- Bada BLI Logo (left) -->
-      <a href="/" aria-label="Bada BLI Home">
-        <img
-          src="/logo-white.png"
-          alt="Bada BLI"
-          class="h-8 sm:h-10 w-auto object-contain"
-        />
-      </a>
-
-      <!-- x Dongyang University (right) -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <span class="text-white/60 text-sm sm:text-base font-light tracking-widest uppercase select-none">×</span>
-        <span class="text-white text-xs sm:text-sm font-medium tracking-wider uppercase whitespace-nowrap">
-          Dongyang University
-        </span>
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 bg-transparent text-white py-0">
+      <div class="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <a href="/" class="hover:opacity-80 transition-opacity">
+          <img src="/logo-white.png" alt="Bada BLI Logo" class="h-[60px] md:h-[80px] w-auto">
+        </a>
+        <nav class="hidden md:flex space-x-10 text-sm font-medium tracking-widest uppercase">
+          <a href="/" class="relative group">
+            Home
+            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="/program.html" class="relative group">
+            Program
+            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="/k-culture.html" class="relative group">
+            K-Culture
+            <span class="absolute -bottom-2 left-0 w-full h-0.5 bg-white transition-all duration-300"></span>
+          </a>
+          <a href="/#footer" class="relative group">
+            CS
+            <span class="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </nav>
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden text-white hover:text-gray-300 transition" onclick="document.getElementById('mobile-menu').classList.toggle('hidden');document.getElementById('mobile-menu').classList.toggle('flex');">
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+      <!-- Mobile Menu Dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-black/90 backdrop-blur-md shadow-xl border-t border-white/10 flex-col items-center py-6 space-y-4">
+        <a href="/" class="text-white text-lg font-medium tracking-widest uppercase">Home</a>
+        <a href="/program.html" class="text-white text-lg font-medium tracking-widest uppercase">Program</a>
+        <a href="/k-culture.html" class="text-white text-lg font-medium tracking-widest uppercase">K-Culture</a>
+        <a href="/#footer" class="text-white text-lg font-medium tracking-widest uppercase">CS</a>
       </div>
     </header>
 
