@@ -164,6 +164,21 @@ Bada BLI가 동양대학교와 독점 계약으로 운영하는 "Global K-Cultur
   - 저작권: © 2026 Bada BLI x Dongyang University
   - SNS 링크 (있을 경우)
 
+## Critical Constraints
+
+### 1. 기존 페이지 무영향 (ABSOLUTE)
+- `index.html`, `program.html` 등 기존 파일은 **절대 수정하지 않는다**
+- `k-culture.html`은 완전히 독립된 새 파일이며, 기존 CSS/JS와 충돌 없어야 한다
+- 네비게이션에 링크를 추가하는 것 외에 기존 파일 변경 없음
+
+### 2. 완벽한 반응형 (ABSOLUTE)
+- **모바일 퍼스트** 설계 — 모바일에서 먼저 완벽하게 작동한 후 데스크톱 확장
+- 모든 섹션, 모든 컴포넌트가 320px~1920px 모든 뷰포트에서 정상 표시
+- 히어로 영상/이미지: 모바일에서도 `object-fit: cover`로 풀스크린
+- 텍스트 오버플로우 없음, 가로 스크롤 없음
+- 터치 타겟 최소 48x48px (모바일 버튼/링크)
+- Playwright로 PC/모바일 양쪽 테스트 필수
+
 ## Technical Architecture
 
 ### Stack
