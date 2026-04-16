@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /level-test/
+
+Sitemap: https://badabli.com/sitemap.xml
