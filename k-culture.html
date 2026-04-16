@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Global K-Culture Elite Program | Bada BLI x Dongyang University</title>
+  <meta name="description" content="From Global Audition to Global Stage. Join the Global K-Culture Elite Program by Bada BLI and Dongyang University — your pathway to K-Pop, K-Drama, and the Korean entertainment industry." />
+  <meta name="keywords" content="K-Culture, K-Pop, Korean entertainment, global audition, Dongyang University, Bada BLI, Korean music, K-Drama, study in Korea" />
+  <meta name="author" content="Bada BLI" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://badabli.com/k-culture.html" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://badabli.com/k-culture.html" />
+  <meta property="og:title" content="Global K-Culture Elite Program | Bada BLI x Dongyang University" />
+  <meta property="og:description" content="From Global Audition to Global Stage. Your pathway to K-Pop, K-Drama, and the Korean entertainment industry." />
+  <meta property="og:image" content="https://badabli.com/bada%20bli%20hero%20sample%20pic.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Bada BLI" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Global K-Culture Elite Program | Bada BLI x Dongyang University" />
+  <meta name="twitter:description" content="From Global Audition to Global Stage. Your pathway to K-Pop, K-Drama, and the Korean entertainment industry." />
+  <meta name="twitter:image" content="https://badabli.com/bada%20bli%20hero%20sample%20pic.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'kc-bg':           '#0A0A0A',
+            'kc-card':         '#111111',
+            'kc-border':       'rgba(255,255,255,0.1)',
+            'kc-accent':       '#A855F7',
+            'kc-accent-glow':  '#C084FC',
+            'kc-blue':         '#23508e',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4X4L6N4JJ7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-4X4L6N4JJ7');
+  </script>
+
+  <!-- Custom CSS Utilities -->
+  <style>
+    body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .kc-glow { box-shadow: 0 0 30px rgba(168, 85, 247, 0.3); }
+    .kc-glow-hover:hover { box-shadow: 0 0 40px rgba(168, 85, 247, 0.5); }
+    .kc-text-gradient { background: linear-gradient(135deg, #A855F7, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .kc-reveal { opacity: 0; transform: translateY(40px); }
+    .faq-open .max-h-0 { max-height: 200px; }
+    .faq-open .ph-caret-down { transform: rotate(180deg); }
+  </style>
+</head>
+
+<body class="bg-kc-bg text-white font-sans antialiased">
+
+  <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+  <section id="hero" class="relative h-screen w-full overflow-hidden flex flex-col">
+
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/bada%20bli%20hero%20sample%20pic.png"
+        alt="K-Culture program hero — performers on stage"
+        class="w-full h-full object-cover object-center"
+      />
+      <!-- Dark Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0A0A0A]"></div>
+    </div>
+
+    <!-- Top Bar -->
+    <header class="relative z-10 flex items-center justify-between px-6 sm:px-10 pt-6 sm:pt-8">
+      <!-- Bada BLI Logo (left) -->
+      <a href="/" aria-label="Bada BLI Home">
+        <img
+          src="/logo-white.png"
+          alt="Bada BLI"
+          class="h-8 sm:h-10 w-auto object-contain"
+        />
+      </a>
+
+      <!-- x Dongyang University (right) -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <span class="text-white/60 text-sm sm:text-base font-light tracking-widest uppercase select-none">×</span>
+        <span class="text-white text-xs sm:text-sm font-medium tracking-wider uppercase whitespace-nowrap">
+          Dongyang University
+        </span>
+      </div>
+    </header>
+
+    <!-- Center Content -->
+    <div class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 sm:px-10">
+
+      <!-- Subtitle -->
+      <p class="text-kc-accent-glow text-xs sm:text-sm md:text-base font-semibold tracking-[0.25em] sm:tracking-[0.35em] uppercase mb-4 sm:mb-6 kc-reveal">
+        From Global Audition to Global Stage
+      </p>
+
+      <!-- H1 -->
+      <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight mb-6 sm:mb-8 kc-reveal max-w-5xl">
+        <span class="block text-white">GLOBAL K-CULTURE</span>
+        <span class="block kc-text-gradient">ELITE PROGRAM</span>
+      </h1>
+
+      <!-- Apply Now Button -->
+      <a
+        href="#apply"
+        class="inline-flex items-center gap-2 bg-kc-accent hover:bg-kc-accent-glow text-white font-semibold text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300 kc-glow kc-glow-hover kc-reveal"
+        aria-label="Apply Now for the Global K-Culture Elite Program"
+      >
+        Apply Now
+        <i class="ph ph-arrow-right text-lg"></i>
+      </a>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="relative z-10 flex flex-col items-center pb-8 sm:pb-10 gap-2">
+      <span class="text-white/40 text-xs tracking-widest uppercase">Scroll</span>
+      <div class="animate-bounce">
+        <i class="ph ph-caret-down text-white/40 text-xl"></i>
+      </div>
+    </div>
+
+  </section>
+  <!-- END: HERO SECTION -->
+
+  <!-- Sections will be added in subsequent tasks -->
+
+  <!-- Scripts will be added in Task 9 -->
+</body>
+</html>
