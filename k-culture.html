@@ -86,10 +86,56 @@
     .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
     .faq-open .faq-body { max-height: 300px; }
     .faq-open .ph-caret-down { transform: rotate(180deg); }
+
+    /* Cursor Glow */
+    .cursor-glow {
+      position: fixed; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+      pointer-events: none; z-index: 1; transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+    @media (max-width: 768px) { .cursor-glow { display: none; } }
+
+    /* 3D Tilt + Spotlight */
+    [data-tilt] {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, border-color 0.3s;
+      will-change: transform;
+    }
+    [data-tilt]:hover { border-color: rgba(168, 85, 247, 0.3); }
+    [data-tilt] .spotlight {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0;
+      transition: opacity 0.3s; border-radius: inherit;
+    }
+    [data-tilt]:hover .spotlight { opacity: 1; }
+
+    /* Enhanced hover transitions */
+    .kc-card-hover {
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .kc-card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(168, 85, 247, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(168, 85, 247, 0.1);
+    }
+
+    /* FAQ hover */
+    .faq-item:hover { background: rgba(255, 255, 255, 0.02); }
+
+    /* Button pulse animation for main CTA */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.6), 0 0 60px rgba(168, 85, 247, 0.2); }
+    }
+    .kc-pulse { animation: pulse-glow 2s ease-in-out infinite; }
   </style>
 </head>
 
 <body class="bg-kc-bg text-white font-sans antialiased">
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
 
   <!-- ============================================================
        HERO SECTION
@@ -144,6 +190,7 @@
       <!-- Apply Now Button -->
       <a
         href="#apply"
+        data-magnetic
         class="inline-flex items-center gap-2 bg-kc-accent hover:bg-kc-accent-glow text-white font-semibold text-sm sm:text-base px-8 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300 kc-glow kc-glow-hover"
         aria-label="Apply Now for the Global K-Culture Elite Program"
       >
@@ -177,57 +224,68 @@
       </div>
 
       <!-- Logo Grid: 8 labels -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 kc-reveal">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 kc-reveal" data-stagger>
         <!-- HYBE -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-black text-lg sm:text-xl tracking-wider">HYBE</span>
         </div>
         <!-- SM -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-black text-lg sm:text-xl tracking-wider">SM</span>
         </div>
         <!-- YG -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-black text-lg sm:text-xl tracking-wider">YG</span>
         </div>
         <!-- JYP -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-black text-lg sm:text-xl tracking-wider">JYP</span>
         </div>
         <!-- ADOR -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-black text-lg sm:text-xl tracking-wider">ADOR</span>
         </div>
         <!-- THE BLACK LABEL -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-bold text-sm sm:text-base tracking-wider text-center leading-tight">THE BLACK<br>LABEL</span>
         </div>
         <!-- STARSHIP -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-black text-lg sm:text-xl tracking-wider">STARSHIP</span>
         </div>
         <!-- PLEDIS -->
-        <div class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="flex items-center justify-center bg-kc-card border border-kc-border rounded-2xl px-6 py-8 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="text-white font-black text-lg sm:text-xl tracking-wider">PLEDIS</span>
         </div>
       </div>
 
       <!-- Collaboration Types -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 kc-reveal">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 kc-reveal" data-stagger>
         <!-- Field Training -->
-        <div class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 kc-card-hover">
+          <div class="spotlight"></div>
           <i class="ph ph-buildings text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-base">Field Training</h3>
           <p class="text-white/50 text-sm leading-relaxed">On-site experience inside top entertainment companies</p>
         </div>
         <!-- Internships -->
-        <div class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 kc-card-hover">
+          <div class="spotlight"></div>
           <i class="ph ph-briefcase text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-base">Internships</h3>
           <p class="text-white/50 text-sm leading-relaxed">Paid internship pathways with partner agencies</p>
         </div>
         <!-- Joint R&D -->
-        <div class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-6 flex flex-col items-center text-center gap-3 kc-card-hover">
+          <div class="spotlight"></div>
           <i class="ph ph-lightbulb text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-base">Joint R&amp;D</h3>
           <p class="text-white/50 text-sm leading-relaxed">Collaborative research with industry leaders</p>
@@ -259,16 +317,19 @@
       </p>
 
       <!-- Stats Cards -->
-      <div class="grid grid-cols-3 gap-4 sm:gap-6 kc-reveal">
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2">
-          <span class="kc-text-gradient text-4xl sm:text-5xl font-black">4</span>
+      <div class="grid grid-cols-3 gap-4 sm:gap-6 kc-reveal" data-stagger>
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span data-count="4" class="kc-text-gradient text-4xl sm:text-5xl font-black">4</span>
           <span class="text-white/60 text-sm sm:text-base font-medium">Years</span>
         </div>
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2">
-          <span class="kc-text-gradient text-4xl sm:text-5xl font-black">5</span>
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
+          <span data-count="5" class="kc-text-gradient text-4xl sm:text-5xl font-black">5</span>
           <span class="text-white/60 text-sm sm:text-base font-medium">Tracks</span>
         </div>
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2">
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center gap-2 kc-card-hover">
+          <div class="spotlight"></div>
           <span class="kc-text-gradient text-4xl sm:text-5xl font-black">8+</span>
           <span class="text-white/60 text-sm sm:text-base font-medium">Partners</span>
         </div>
@@ -325,38 +386,43 @@
       </div>
 
       <!-- Track Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 kc-reveal">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 kc-reveal" data-stagger>
 
         <!-- Track 1: K-Pop Business -->
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 hover:border-kc-accent/30 hover:kc-glow transition-all duration-300">
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
           <i class="ph ph-music-notes text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Pop Business</h3>
           <p class="text-white/50 text-sm leading-relaxed">Artist management, fandom business, global production strategy</p>
         </div>
 
         <!-- Track 2: K-Performance -->
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 hover:border-kc-accent/30 hover:kc-glow transition-all duration-300">
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
           <i class="ph ph-microphone-stage text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Performance</h3>
           <p class="text-white/50 text-sm leading-relaxed">Concert planning, stage production, performance branding</p>
         </div>
 
         <!-- Track 3: K-Beauty Business -->
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 hover:border-kc-accent/30 hover:kc-glow transition-all duration-300">
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
           <i class="ph ph-sparkle text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Beauty Business</h3>
           <p class="text-white/50 text-sm leading-relaxed">Global beauty marketing, e-commerce, brand launching</p>
         </div>
 
         <!-- Track 4: K-Fusion Media & Content -->
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 hover:border-kc-accent/30 hover:kc-glow transition-all duration-300">
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
           <i class="ph ph-video-camera text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">K-Fusion Media &amp; Content</h3>
           <p class="text-white/50 text-sm leading-relaxed">Content planning, SNS marketing, YouTube business</p>
         </div>
 
         <!-- Track 5: Global Entertainment Startup (centered on tablet) -->
-        <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 hover:border-kc-accent/30 hover:kc-glow transition-all duration-300 sm:col-span-2 lg:col-span-1">
+        <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-4 kc-card-hover sm:col-span-2 lg:col-span-1">
+          <div class="spotlight"></div>
           <i class="ph ph-rocket-launch text-kc-accent text-3xl"></i>
           <h3 class="text-white font-bold text-lg">Global Entertainment Startup</h3>
           <p class="text-white/50 text-sm leading-relaxed">Business modelling, IP business, platform entrepreneurship</p>
@@ -367,10 +433,11 @@
       <!-- 4-Year Roadmap -->
       <div class="kc-reveal">
         <h3 class="text-center text-white font-bold text-xl mb-8">4-Year Roadmap</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-stagger>
 
           <!-- Year 1 -->
-          <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3">
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
             <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
               <span class="text-kc-accent font-black text-base">1</span>
             </div>
@@ -380,7 +447,8 @@
           </div>
 
           <!-- Year 2 -->
-          <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3">
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
             <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
               <span class="text-kc-accent font-black text-base">2</span>
             </div>
@@ -390,7 +458,8 @@
           </div>
 
           <!-- Year 3 -->
-          <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3">
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
             <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
               <span class="text-kc-accent font-black text-base">3</span>
             </div>
@@ -400,7 +469,8 @@
           </div>
 
           <!-- Year 4 -->
-          <div class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3">
+          <div data-tilt class="bg-kc-bg border border-kc-border rounded-2xl p-6 flex flex-col gap-3 kc-card-hover">
+            <div class="spotlight"></div>
             <div class="w-10 h-10 rounded-full bg-kc-accent/20 flex items-center justify-center">
               <span class="text-kc-accent font-black text-base">4</span>
             </div>
@@ -431,10 +501,11 @@
       </div>
 
       <!-- Plan Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 kc-reveal">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 kc-reveal" data-stagger>
 
         <!-- Plan A -->
-        <div class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full bg-kc-accent/20 flex items-center justify-center flex-shrink-0">
               <span class="text-kc-accent font-black text-sm">A</span>
@@ -445,7 +516,8 @@
         </div>
 
         <!-- Plan B -->
-        <div class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full bg-kc-accent/20 flex items-center justify-center flex-shrink-0">
               <span class="text-kc-accent font-black text-sm">B</span>
@@ -456,7 +528,8 @@
         </div>
 
         <!-- Plan C -->
-        <div class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 hover:border-kc-accent/30 transition-colors duration-300">
+        <div data-tilt class="bg-kc-card border border-kc-border rounded-2xl p-7 flex flex-col gap-4 kc-card-hover">
+          <div class="spotlight"></div>
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-full bg-kc-accent/20 flex items-center justify-center flex-shrink-0">
               <span class="text-kc-accent font-black text-sm">C</span>
@@ -685,8 +758,9 @@
       <div class="kc-reveal">
         <button
           id="checkout-btn"
+          data-magnetic
           onclick="handleCheckout()"
-          class="inline-flex items-center gap-3 bg-kc-accent hover:bg-kc-accent-glow text-white font-bold text-base sm:text-lg px-10 sm:px-14 py-4 sm:py-5 rounded-full transition-all duration-300 kc-glow kc-glow-hover mb-4"
+          class="inline-flex items-center gap-3 bg-kc-accent hover:bg-kc-accent-glow text-white font-bold text-base sm:text-lg px-10 sm:px-14 py-4 sm:py-5 rounded-full transition-all duration-300 kc-glow kc-glow-hover kc-pulse mb-4"
         >
           Apply Now — $20 USD
           <i class="ph ph-arrow-right text-xl"></i>
@@ -783,16 +857,81 @@
         }
     }
 
-    // GSAP Scroll Reveal
+    // Enhanced GSAP Scroll Reveal
     gsap.registerPlugin(ScrollTrigger);
-    document.querySelectorAll('.kc-reveal').forEach(el => {
-        gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: el, start: 'top 85%', once: true }
-        });
+
+    // Default reveal (fade up)
+    document.querySelectorAll('.kc-reveal').forEach(function(el) {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 0.8,
+        ease: 'power2.out',
+        delay: el.dataset.delay ? parseFloat(el.dataset.delay) : 0,
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    // Stagger children in grids
+    document.querySelectorAll('[data-stagger]').forEach(function(grid) {
+      var children = grid.children;
+      gsap.fromTo(children,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out',
+          scrollTrigger: { trigger: grid, start: 'top 80%', once: true }
+        }
+      );
+    });
+
+    // Counter animation for stats
+    document.querySelectorAll('[data-count]').forEach(function(el) {
+      var target = parseInt(el.dataset.count, 10);
+      gsap.from(el, {
+        textContent: 0, duration: 1.5, ease: 'power2.out',
+        snap: { textContent: 1 },
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+
+    // Cursor Glow
+    (function(){
+      var glow = document.getElementById('cursorGlow');
+      var mx = 0, my = 0, gx = 0, gy = 0;
+      document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
+      function moveGlow() {
+        gx += (mx - gx) * 0.1; gy += (my - gy) * 0.1;
+        glow.style.transform = 'translate(' + (gx - 250) + 'px,' + (gy - 250) + 'px)';
+        requestAnimationFrame(moveGlow);
+      }
+      moveGlow();
+    })();
+
+    // 3D Tilt + Spotlight
+    document.querySelectorAll('[data-tilt]').forEach(function(card) {
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = 'perspective(600px) rotateY(' + (x * 8) + 'deg) rotateX(' + (-y * 8) + 'deg) scale(1.02)';
+        var spot = card.querySelector('.spotlight');
+        if (spot) spot.style.background = 'radial-gradient(circle at ' + (e.clientX - rect.left) + 'px ' + (e.clientY - rect.top) + 'px, rgba(168,85,247,0.06) 0%, transparent 60%)';
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale(1)';
+      });
+    });
+
+    // Magnetic Buttons
+    document.querySelectorAll('[data-magnetic]').forEach(function(btn) {
+      btn.addEventListener('mousemove', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var dx = (e.clientX - cx) * 0.25;
+        var dy = (e.clientY - cy) * 0.25;
+        btn.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+      });
+      btn.addEventListener('mouseleave', function() {
+        btn.style.transform = 'translate(0,0)';
+      });
     });
   </script>
 </body>
